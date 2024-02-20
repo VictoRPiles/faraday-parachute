@@ -1,10 +1,8 @@
 import logging
 
-from logger.LoggerFormatter import configure_logger
 from rocket.Rocket import Rocket
 
 if __name__ == '__main__':
-    configure_logger()
     logging.info("Faraday Rocketry parachute deployment system activated")
 
     rocket = Rocket()

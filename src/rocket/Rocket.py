@@ -1,7 +1,7 @@
 import logging
 
-from data.FlightData import FlightData
-from gravity.gravity import calculate_gravity
+from src.data.FlightData import FlightData
+from src.gravity.gravity import calculate_gravity
 
 
 class Rocket:
