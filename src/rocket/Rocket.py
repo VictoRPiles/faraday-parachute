@@ -75,6 +75,6 @@ class Rocket:
             self.attitude_upwards = False
         return self.attitude_upwards
 
-    def release_parachute(self):
+    def release_parachute(self) -> None:
         self.parachute_released = True
         logging.warning("Parachute deployment confirmed")
