@@ -14,7 +14,7 @@ def main():
     logging.debug("Generating sample data...")
     index = 0
     while not rocket.parachute_released:
-        # Throw an error if no sample data was provided. For testing purposes.
+        # Throw an error if no sample data was provided (for testing purposes)
         if len(sample_flight_data) <= index:
             logging.error("Not enough sample data provided")
             sys.exit(1)
