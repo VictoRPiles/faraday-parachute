@@ -5,6 +5,7 @@ COLOR_CODES = {
     'RED': '\033[91m',
     'YELLOW': '\033[93m',
     'GREEN': '\033[92m',
+    "PURPLE": "\033[35m",
     'RESET': '\033[0m'
 }
 
@@ -35,6 +36,8 @@ class LoggerFormatter(logging.Formatter):
             level_color = COLOR_CODES['YELLOW']
         elif levelname == 'INFO':
             level_color = COLOR_CODES['GREEN']
+        elif levelname == 'DEBUG':
+            level_color = COLOR_CODES['PURPLE']
         else:
             level_color = COLOR_CODES['RESET']
 
