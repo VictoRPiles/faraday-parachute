@@ -7,7 +7,8 @@ from src.data.FlightData import FlightData
 class Rocket:
     def __init__(self):
         self.flight_data_history: [FlightData] = []
-        self.engine_on = False
+        self.engine_on = None
+        self.attitude_upwards = None
         self.parachute_released = False
 
     def last_data(self) -> FlightData:
@@ -33,7 +34,7 @@ class Rocket:
                 self.engine_on = False
             return True
         # Check if the engine was off and then turned on (for ignition)
-        if not self.engine_on:
+        elif not self.engine_on:
             logging.warning(f"Engine startup detected -> ay={acceleration_y}m/s²")
         self.engine_on = True
         return False
@@ -55,16 +56,20 @@ class Rocket:
             return True
         return False
 
-    def check_pointing_downwards(self) -> bool:
+    def check_pointing_upwards(self) -> bool:
         """
         To ensure that the parachute deployment occurs when the rocket is in a stable descent orientation, deploy the
-        parachute only if the tilt angle is greater than or equal to 90 degrees.
+        parachute only if the tilt angle is between 30 and 150 degrees.
         """
         theta = self.last_data().position_angles[1]
-        if theta >= 90:
+        if 30 <= theta <= 150:
+            if not self.attitude_upwards:
+                logging.warning(f"Attitude pointing upwards -> θy={theta}º")
+                self.attitude_upwards = True
+        elif self.attitude_upwards:
             logging.warning(f"Attitude pointing downwards -> θy={theta}º")
-            return True
-        return False
+            self.attitude_upwards = False
+        return self.attitude_upwards
 
     def release_parachute(self):
         self.parachute_released = True

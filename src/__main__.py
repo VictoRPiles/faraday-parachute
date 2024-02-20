@@ -22,7 +22,7 @@ def main():
         rocket.flight_data_history.append(sample_flight_data[index])
 
         logging.info(rocket.last_data())
-        if rocket.check_engine_shut_down() & rocket.check_altitude_decreasing() & rocket.check_pointing_downwards():
+        if rocket.check_engine_shut_down() & rocket.check_altitude_decreasing() & rocket.check_pointing_upwards():
             rocket.release_parachute()
 
         index += 1
