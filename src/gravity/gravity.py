@@ -7,6 +7,7 @@ def calculate_gravity(altitude) -> float:
     """
     Calculate gravity from the center of the Earth to the rocket's position
     """
+    # noinspection PyPep8Naming
     R = R_earth + altitude
     g = -((G * M) / (R ** 2))
     return g
