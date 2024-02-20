@@ -18,14 +18,16 @@ class Rocket:
         Verify whether the engine has ceased producing thrust by calculating the gravitational force at the current
         altitude and comparing it to the acceleration in the y-axis present in the flight data.
 
-        Potential drag effects have been taken into account.
+        Potential drag effects and uncertainties have been taken into account.
 
         Parachute can be deployed iff the engine has shut down.
         """
         # The <= is because of the drag effect
         acceleration_y = self.last_data().acceleration[1]
+        # Added uncertainty for reliability reasons
+        uncertainty = 0.5
         gravity = calculate_gravity(self.last_data().altitude)
-        if acceleration_y <= gravity:
+        if (gravity - uncertainty) <= acceleration_y <= (gravity + uncertainty):
             if self.engine_on:
                 logging.warning(f"Engine shutdown detected -> ay={acceleration_y}m/s²")
                 self.engine_on = False
@@ -39,11 +41,16 @@ class Rocket:
     def check_altitude_decreasing(self) -> bool:
         """
         Determine if the rocket's altitude is decreasing by contrasting its previous altitude with the current one.
+
+        For enhanced reliability, both altimeter readings and GPS coordinates are employed.
         """
         if len(self.flight_data_history) < 2:
             return False
         altitude = self.last_data().altitude
-        if altitude < self.flight_data_history[-2].altitude:
+        altitude_gps = self.last_data().gps_coordinates[1]
+        altitude_decreasing = altitude < self.flight_data_history[-2].altitude
+        altitude_decreasing_gps = altitude_gps < self.flight_data_history[-2].gps_coordinates[1]
+        if altitude_decreasing & altitude_decreasing_gps:
             logging.warning(f"Altitude decreasing -> h={altitude}m")
             return True
         return False
