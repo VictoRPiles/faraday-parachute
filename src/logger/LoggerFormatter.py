@@ -10,23 +10,6 @@ COLOR_CODES = {
 }
 
 
-def configure_logger():
-    # Create logger
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
-
-    # Create console handler and set level to debug
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-
-    # Set formatter
-    formatter = LoggerFormatter('%(levelname)s - %(message)s')
-    ch.setFormatter(formatter)
-
-    # Add console handler to logger
-    logger.addHandler(ch)
-
-
 class LoggerFormatter(logging.Formatter):
     def format(self, record):
         levelname = record.levelname
@@ -49,3 +32,17 @@ class LoggerFormatter(logging.Formatter):
         record.msg = formatted_message
 
         return super().format(record)
+
+    @staticmethod
+    def configure_logger():
+        # Create logger
+        logger = logging.getLogger()
+        logger.setLevel(logging.DEBUG)
+        # Create console handler and set level to debug
+        ch = logging.StreamHandler()
+        ch.setLevel(logging.DEBUG)
+        # Set formatter
+        formatter = LoggerFormatter('%(levelname)s - %(message)s')
+        ch.setFormatter(formatter)
+        # Add console handler to logger
+        logger.addHandler(ch)

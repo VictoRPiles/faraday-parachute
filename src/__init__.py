@@ -1,3 +1,3 @@
-from logger.LoggerFormatter import configure_logger
+from logger.LoggerFormatter import LoggerFormatter
 
-configure_logger()
+LoggerFormatter.configure_logger()
