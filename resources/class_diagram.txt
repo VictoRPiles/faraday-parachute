@@ -1,0 +1,57 @@
+@startuml
+struct __main__ {
++main() : None
+}
+struct __init__
+
+class Rocket {
+-flight_data_history : [FlightData]
+-engine_on : bool
+-attitude_upwards : bool
+-parachute_released : bool
++last_data() : FlightData
++check_engine_shut_down() : bool
++check_altitude_decreasing() : bool
++check_pointing_upwards() : bool
++release_parachute() : None
+}
+class FlightData {
+-altitude : float
+-pressure : float
+-temperature: float
+-acceleration : [float]
+-position_angles : [float]
+-gps_coordinates : [float]
+-sample_flight_data : [FlightData]
++__str__() : str
+}
+class Gravity {
+-G_const : float
+-M_earth :_float
+-R_earth : float
++calculate_gravity(altitude) : float
+}
+abstract class Formatter
+class LoggerFormatter {
+-COLOR_CODES : [String, String]
++format(record) : None
++configure_logger() : None
+}
+
+__init__ <-- LoggerFormatter : Initializes
+
+__main__ <-- Rocket : Calls
+__main__ <-- FlightData : Calls
+
+Rocket <-- Gravity : Uses
+Rocket <- FlightData : Uses
+
+Formatter <|-- LoggerFormatter : Inherits
+
+note right of FlightData::__str__
+  Overrided
+end note
+note right of LoggerFormatter::format
+  Overrided
+end note
+@enduml
