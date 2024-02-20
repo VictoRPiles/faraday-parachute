@@ -1,3 +1,7 @@
+__author__ = "Víctor Piles"
+__email__ = "vpildel@upv.edu.es"
+__date__ = "19/02/2024"
+
 import logging
 
 from gravity.Gravity import Gravity

@@ -1,3 +1,7 @@
+__author__ = "Víctor Piles"
+__email__ = "vpildel@upv.edu.es"
+__date__ = "20/02/2024"
+
 G = 6.67430e-11  # Gravitational constant in m^3/kg/s^2
 M = 5.972e24  # Mass of the Earth in kg
 R_earth = 6371000  # Radius of the Earth in meters
