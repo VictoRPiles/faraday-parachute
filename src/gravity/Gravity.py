@@ -2,8 +2,8 @@ __author__ = "Víctor Piles"
 __email__ = "vpildel@upv.edu.es"
 __date__ = "20/02/2024"
 
-G = 6.67430e-11  # Gravitational constant in m^3/kg/s^2
-M = 5.972e24  # Mass of the Earth in kg
+G_const = 6.67430e-11  # Gravitational constant in m^3/kg/s^2
+M_earth = 5.972e24  # Mass of the Earth in kg
 R_earth = 6371000  # Radius of the Earth in meters
 
 
@@ -16,5 +16,5 @@ class Gravity:
         """
         # noinspection PyPep8Naming
         R = R_earth + altitude
-        g = -((G * M) / (R ** 2))
+        g = -((G_const * M_earth) / (R ** 2))
         return g
