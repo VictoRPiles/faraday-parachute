@@ -1,3 +1,6 @@
+from gravity.gravity import calculate_gravity
+
+
 class FlightData:
     def __init__(self,
                  altitude: float, pressure: float, temperature: float,
@@ -20,3 +23,16 @@ class FlightData:
             "position_angles": self.position_angles,
             "gps_coordinates": self.gps_coordinates,
         })
+
+
+# Sample data for testing purposes
+sample_flight_data: [FlightData] = [
+    FlightData(100, 100, 100,
+               [100, 100, 100],
+               [100, 100, 100],
+               [100, 100, 100]),
+    FlightData(90, 100, 100,
+               [100, calculate_gravity(90), 100],
+               [100, 100, 100],
+               [100, 100, 100])
+]
