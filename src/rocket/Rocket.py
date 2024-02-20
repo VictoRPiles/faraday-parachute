@@ -1,7 +1,7 @@
 import logging
 
+from gravity.Gravity import Gravity
 from src.data.FlightData import FlightData
-from src.gravity.gravity import calculate_gravity
 
 
 class Rocket:
@@ -26,7 +26,7 @@ class Rocket:
         acceleration_y = self.last_data().acceleration[1]
         # Added uncertainty for reliability reasons
         uncertainty = 0.5
-        gravity = calculate_gravity(self.last_data().altitude)
+        gravity = Gravity.calculate_gravity(self.last_data().altitude)
         if (gravity - uncertainty) <= acceleration_y <= (gravity + uncertainty):
             if self.engine_on:
                 logging.warning(f"Engine shutdown detected -> ay={acceleration_y}m/s²")
