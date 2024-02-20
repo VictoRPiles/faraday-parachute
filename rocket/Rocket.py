@@ -54,9 +54,9 @@ class Rocket:
         """
         Release the parachute iff the tilt angle is >= 90 degrees
         """
-        alpha_y = self.last_data().position_angles[1]
-        if alpha_y >= 90:
-            logging.warning(f"Attitude pointing downwards -> αy={alpha_y}º")
+        theta = self.last_data().position_angles[1]
+        if theta >= 90:
+            logging.warning(f"Attitude pointing downwards -> θy={theta}º")
             return True
         return False
 
